@@ -2,6 +2,7 @@ import { CalendarIcon } from "./icons/calendar";
 import { GaugeIcon } from "./icons/gauge";
 import { HorseIcon } from "./icons/horse";
 import Image from "next/image";
+import Link from "next/link";
 
 interface CarCardProps {
   href: string
@@ -27,8 +28,8 @@ export function CarCard({
   isCollectiePage = false,
 }: CarCardProps) {
   return (
-    <a
-      href={href}
+    <Link
+      href="/auto"
       className="block bg-black overflow-hidden group shine-effect"
     >
       <div className="relative aspect-[3/2] overflow-hidden card-image-wrapper">
@@ -102,6 +103,6 @@ export function CarCard({
           </>
         )}
       </div>
-    </a>
+    </Link>
   );
 }

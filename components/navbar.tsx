@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <nav className="absolute top-0 left-0 right-0 z-30">
       <div className={`mx-auto ${isHomePage ? 'max-w-7xl' : 'max-w-9xl'} px-6  py-4`}>
-        <div className="border-b border-white/20 pb-4">
+        <div className={`${isHomePage ? 'border-b  border-white/20' : 'border-none'} pb-4`}>
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0">
             <Link href="/">

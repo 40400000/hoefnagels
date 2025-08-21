@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
+
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { CarCard } from "@/components/car-card"
@@ -66,13 +67,16 @@ export default function CollectiePage() {
 
       <main className="relative pt-8 md:pt-8">
         <div className="max-w-8xl mx-auto px-4 py-12 pt-20">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8 px-4">
-            <h1
-              className="text-white text-3xl md:text-4xl"
-              style={{ fontFamily: "var(--font-cormorant)" }}
-            >
-              Collectie
-            </h1>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8 px-4 ">
+            <div>
+              <h1
+                className="text-white text-3xl md:text-4xl font-medium uppercase tracking-wide"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                COLLECTIE
+              </h1>
+              <div className="mt-4 h-[2px] w-16 bg-[rgb(255,184,0)]"></div>
+            </div>
             <div className="flex items-center gap-6">
               <RangeFilter
                 label="Prijs"
@@ -110,7 +114,7 @@ export default function CollectiePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCars.map((car, index) => (
-              <CarCard key={index} {...car} isCollectiePage={true} />
+              <CarCard key={index} {...car} href="/auto" isCollectiePage={true} />
             ))}
           </div>
         </div>

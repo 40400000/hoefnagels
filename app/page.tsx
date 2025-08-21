@@ -38,14 +38,15 @@ export default function Home() {
         >
           <div className="mb-20">
             <h1 
-              className="text-white text-4xl md:text-5xl font-semibold uppercase tracking-wide"
+              className="text-white text-4xl md:text-5xl font-medium uppercase tracking-wide"
               style={{
                 fontFamily: "var(--font-cormorant)",
                 fontStyle: "normal",
               }}
             >
-              EXCLUSIEVE AUTO'S<br />
-              PERSOONLIJKE AANDACHT
+              WAAR PASSIE<br />
+              EN EXCLUSIVITEIT <br />
+              SAMEN KOMEN
             </h1>
             <div className="mt-4 h-[1px] w-32 bg-[rgb(255,184,0)]"></div>
             
