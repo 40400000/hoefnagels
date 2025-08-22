@@ -25,14 +25,14 @@ const fontCormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: {
-    default: "RTO Exclusive",
-    template: "%s | RTO Exclusive"
+    default: "Hoefnagels",
+    template: "%s | Hoefnagels"
   },
-  description: "RTO Exclusive biedt exclusieve auto's met persoonlijke aandacht. Ontdek onze premium collectie luxe voertuigen en ervaar onze professionele service.",
-  keywords: ["luxe auto's", "exclusieve voertuigen", "premium auto's", "autohandel", "RTO Exclusive", "Nederland"],
-  authors: [{ name: "RTO Exclusive" }],
-  creator: "RTO Exclusive",
-  publisher: "RTO Exclusive",
+  description: "Hoefnagels is hét aanspreekpunt voor iedere liefhebber en verzamelaar met het exclusieve autohart op de juiste plaats. Ontdek onze collectie in Heeze.",
+  keywords: ["luxe auto's", "exclusieve voertuigen", "autohandel", "Hoefnagels", "Heeze", "Nederland"],
+  authors: [{ name: "Hoefnagels" }],
+  creator: "Hoefnagels",
+  publisher: "Hoefnagels",
   robots: {
     index: true,
     follow: true,
@@ -40,15 +40,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "nl_NL",
-    url: "https://rto-exclusive.nl",
-    title: "RTO Exclusive",
-    description: "RTO Exclusive biedt exclusieve auto's met persoonlijke aandacht. Ontdek onze premium collectie luxe voertuigen.",
-    siteName: "RTO Exclusive",
+    url: "https://hoefnagels.nl",
+    title: "Hoefnagels",
+    description: "Hoefnagels is hét aanspreekpunt voor iedere liefhebber en verzamelaar met het exclusieve autohart op de juiste plaats.",
+    siteName: "Hoefnagels",
   },
   twitter: {
     card: "summary_large_image",
-    title: "RTO Exclusive - Exclusieve Auto's & Persoonlijke Aandacht",
-    description: "RTO Exclusive biedt exclusieve auto's met persoonlijke aandacht. Ontdek onze premium collectie luxe voertuigen.",
+    title: "Hoefnagels - Exclusiviteit is bij mij altijd inclusief",
+    description: "Hoefnagels is hét aanspreekpunt voor iedere liefhebber en verzamelaar met het exclusieve autohart op de juiste plaats.",
   },
   viewport: {
     width: "device-width",
