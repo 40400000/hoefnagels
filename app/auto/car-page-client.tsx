@@ -9,12 +9,17 @@ interface Car {
   href: string
   image: string
   title: string
+  subtitle?: string
   price: number
+  priceNote?: string
   year: string
   kilometers: number
   power: string
   brand: string
   logo: string
+  description?: string[]
+  options?: string[]
+  highlights?: string[]
 }
 
 interface CarPageClientProps {
@@ -22,7 +27,74 @@ interface CarPageClientProps {
   additionalImages: string[]
 }
 
-export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
+export function CarPageClient({ car: carProp, additionalImages }: CarPageClientProps) {
+  const car = {
+    ...carProp,
+    brand: "Ferrari",
+    year: "2023",
+    title: "Ferrari SF90 Spider",
+    subtitle: "4.0 V8 Cavalcade, Tailor Made, Assetto Fiorano Wing",
+    price: 599500,
+    priceNote: "BTW Auto",
+    kilometers: 6000,
+    power: "986 pk (1,000 CV)",
+    highlights: [
+      "Tailor Made vehicle",
+      "Assetto Fiorano wing",
+      "Carbon fibre package",
+      "Premium Hi-Fi system",
+      "20” dark forged wheels",
+    ],
+    description: [
+      "Dit is meer dan alleen een SF90 Spider - het is een rijdende viering van Ferrari's erfgoed en vakmanschap, ontworpen voor de 10e verjaardag van de Cavalcade en afgewerkt door Ferrari's Tailor Made atelier. Gespoten in glanzend Blu Capri FYM.0502 is deze SF90 Spider een unieke ode aan design, passie en precisie, waarbij elke draad en penseelstreek een verhaal vertelt.",
+      "De Blu Capri 4-laags lak, uniek voor dit model, wordt geaccentueerd door een historisch tweekleurig Nero dak (BIC2) en een handgetekende livery in Acquamarina Blu die over de motorkap, deuren en spoiler loopt. Een opvallende Bianco King cirkel op elke deur met het getal 70 herinnert aan Ferrari's raceverleden, terwijl de Italiaanse en Nederlandse vlagmotieven bij de dorpels wijzen op de wereldwijde passie die Ferrari oproept.",
+      "Het interieur is een Tailor Made symfonie van Argento Alcantara en Blue South Beach Ultrasuede, waarbij elk oppervlak spreekt tot de ziel van vakmanschap: Speciale editie racestoelen in Argento 4978 Alcantara, met galletone perforaties en contrasterende Blu South Beach centrale accenten. Ton-sur-ton maatwerk stikwerk in zilver, blauw en zwart, elk passend bij het respectieve paneel met artistieke precisie. Cavallino hoofdsteunen geborduurd met speciaal garen. Aluminium F1 paddles afgewerkt in Blu Capri voor een tastbare verbinding tussen bestuurder en machine.",
+      "Deze Ferrari SF90 Spider Cavalcade isn’t just a hypercar. It’s history on wheels, created to celebrate Ferrari’s most exclusive clients, hand-built by the artisans at the Tailor Made studio in Maranello. 1 of 1. Commissioned for an elite event. Immortalized in Blu Capri, laced with Acquamarina, and sealed with legacy."
+    ],
+    options: [
+        "APPLE CARPLAY",
+        "ADAPTIVE FRONTLIGHT SYSTEM",
+        "INTERNAL PAINTED ALLUMINIUM ELEMENTS (EXTRA-RANGE)",
+        "PAINTED ALLUMINIUM F1 PADDLES",
+        "TWO-TONE BODYWORK (NERO)",
+        "HISTORIC LIVERY WITH 2 CIRCLES",
+        "YELLOW BRAKE CALLIPERS",
+        "BLU CAPRI CAVALCADE (ARGENTINA)",
+        "CARBON FIBRE SIDE AIR SPLITTER",
+        "CARBON FIBRE REAR BOOT TRIM",
+        "REAR DIFFUSOR CARBON FIBRE",
+        "CARBON FIBRE UNDERDOOR COVER",
+        "CARBON FIBRE DRIVER ZONE+LEDS",
+        "CARBON FIBRE INSTRUMENT COVER",
+        "CENTRE SECTION OF DOOR IN CARBON",
+        "EXTERIOR SILL KICK IN CARBON",
+        "CARBON FIBRE UPPER CENTRE CONSOLE TRIM",
+        "COLOURED INNER DETAILS",
+        "CARBON FIBRE DASHBOARD INSERTS",
+        "DEDICATION PLATE IN SILVER",
+        "SUSPENSION LIFTER",
+        "CAVALLINO STITCHED ON HEADREST (EXTRA-RANGE)",
+        "EMPH IN SPECIAL THREAD (EXTRA-RANGE)",
+        "EXHAUST PIPE IN BLACK",
+        "CARBON FIBRE FRONT SPOILER",
+        "ADDITIONAL COLOURED MATS WITH LOGO",
+        "‘SCUDERIA FERRARI’ SHIELDS",
+        "ELECTROCHROMIC REARVIEW MIRROR",
+        "REAR PARKING CAMERA",
+        "FRONT AND REAR PARKING SENSors",
+        "SPECIAL 4-LAYER COLOURS (EXTRA-RANGE)",
+        "20” DARK FORGED WHEELS",
+        "MATT PAINTED WHEELS (NERO)",
+        "CARBON FIBRE RACING SEATS (LARGE)",
+        "PREMIUM HI-FI SYSTEM",
+        "SPECIAL EQUIPMENT",
+        "STC1 IN SPECIAL THREAD (EXTRA-RANGE)",
+        "COLOURED STANDARD STITCHING (EXTRA-RANGE)",
+        "TAILOR MADE",
+        "WHEEL STUD BOLTS IN TITANIUM",
+        "TM CAVALCADE COLLECTION",
+      ]
+  }
   // Create all images array starting with main car image
   const allImages = [car.image, ...additionalImages, ...Array.from({ length: Math.max(0, 53 - additionalImages.length) }, () => null)]
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -33,12 +105,12 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
   const visibleThumbnails = allImages.slice(currentSliderStart, currentSliderStart + imagesPerSlide)
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-white">
       <Navbar />
       
       {/* Hero Section */}
       <motion.div 
-        className="relative w-full h-[50vh] border-b border-white/17 overflow-hidden"
+        className="relative w-full h-[80vh] border-b border-white/17 overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -47,20 +119,20 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
           src={car.image}
           alt={car.title}
           fill
-          className="object-cover object-bottom"
+          className="object-cover object-middle"
           priority
           quality={100}
         />
-        <div className="absolute inset-0 bg-black/85"></div>
+        <div className="absolute inset-0 bg-black/75"></div>
         
-        <div className="relative z-20 mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 py-16 flex items-end justify-start min-h-full">
+        <div className="relative z-20 mx-auto max-w-7xl px-6 py-16 flex items-end justify-start min-h-full">
           <motion.div 
             className="mb-20"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <div className="flex items-center gap-4 mt-4 mb-2">
+            <div className="flex items-center gap-4 mt-10 mb-2">
 
               <div>
                 <p className="text-white/80 uppercase tracking-[0.15em] text-sm font-medium" style={{ fontFamily: "var(--font-sans)" }}>
@@ -70,7 +142,7 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
             </div>
             
             <h1 
-              className="text-white text-4xl md:text-5xl font-medium uppercase tracking-wide mb-4"
+              className="text-white text-4xl md:text-5xl font-medium uppercase tracking-wide mb-2"
               style={{
                 fontFamily: "var(--font-cormorant)",
                 fontStyle: "normal",
@@ -78,30 +150,40 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
             >
               {car.title}
             </h1>
-            
-            <div className="h-[2px] w-32 bg-[rgb(255,184,0)] mb-6"></div>
-            
-            <p 
-              className="text-3xl font-medium"
-              style={{ 
-                fontFamily: "var(--font-sans)", 
-                color: "rgb(255,184,0)", 
-                letterSpacing: "0.15em" 
-              }}
-            >
-              {new Intl.NumberFormat("nl-NL", {
-                style: "currency",
-                currency: "EUR",
-                minimumFractionDigits: 0,
-              }).format(car.price)}
+            <p className="text-white/80 text-lg mb-4" style={{ fontFamily: "var(--font-sans)" }}>
+              {car.subtitle}
             </p>
+            
+            <div className="h-[2px] w-32 bg-[#A37F66] mb-6"></div>
+            
+            <div>
+              <p 
+                className="text-3xl font-medium"
+                style={{ 
+                  fontFamily: "var(--font-sans)", 
+                  color: "#A37F66", 
+                  letterSpacing: "0.15em" 
+                }}
+              >
+                {new Intl.NumberFormat("nl-NL", {
+                  style: "currency",
+                  currency: "EUR",
+                  minimumFractionDigits: 0,
+                }).format(car.price)}
+              </p>
+              {car.priceNote && (
+                <p className="text-white/70 text-sm mt-1" style={{ fontFamily: "var(--font-sans)" }}>
+                  {car.priceNote}
+                </p>
+              )}
+            </div>
           </motion.div>
         </div>
       </motion.div>
 
       {/* Main Content - Full Width Image Gallery */}
       <motion.section 
-        className="bg-black text-white py-16"
+        className="bg-white text-[#31180E] pt-16"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -110,7 +192,7 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
         <div className="mx-auto max-w-7xl px-6">
           {/* Images Gallery - Full Width */}
           <motion.div 
-            className="mb-16"
+            className="mb-4"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -121,7 +203,7 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
               {/* RANDOM VOOR NU, UPDATEN */}
               {/* Left Side Images - Two squares, same height as main image */}
               <div className="w-64 h-[533px] flex flex-col justify-between">
-                <div className="aspect-square overflow-hidden border border-white/10">
+                <div className="aspect-square overflow-hidden border border-gray-200">
                   {allImages[1] ? (
                     <Image
                       src={allImages[1]}
@@ -131,12 +213,12 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-black/20 flex items-center justify-center">
-                      <span className="text-white/30 text-xs">Detail</span>
+                    <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                      <span className="text-gray-400 text-xs">Detail</span>
                     </div>
                   )}
                 </div>
-                <div className="aspect-square overflow-hidden border border-white/10">
+                <div className="aspect-square overflow-hidden border border-gray-200">
                   {allImages[2] ? (
                     <Image
                       src={allImages[2]}
@@ -146,8 +228,8 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-black/20 flex items-center justify-center">
-                      <span className="text-white/30 text-xs">Detail</span>
+                    <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                      <span className="text-gray-400 text-xs">Detail</span>
                     </div>
                   )}
                 </div>
@@ -164,8 +246,8 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
-                  <div className="w-full h-full bg-black/20 border border-white/10 flex items-center justify-center">
-                    <span className="text-white/40 text-lg">Afbeelding {currentImageIndex + 1}</span>
+                  <div className="w-full h-full bg-gray-100 border border-gray-200 flex items-center justify-center">
+                    <span className="text-gray-400 text-lg">Afbeelding {currentImageIndex + 1}</span>
                   </div>
                 )}
               </div>
@@ -174,13 +256,13 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
               <div className="w-28 h-[533px] flex flex-col">
                 {/* Navigation Controls */}
                 <div className="flex flex-col items-center gap-2 mb-2">
-                  <p className="text-white/60 text-xs uppercase tracking-[0.14em] text-center" style={{ fontFamily: "var(--font-sans)" }}>
+                  <p className="text-gray-500 text-xs uppercase tracking-[0.14em] text-center" style={{ fontFamily: "var(--font-sans)" }}>
                     {currentImageIndex + 1}/{allImages.length}
                   </p>
                   <button
                     onClick={() => setCurrentSliderStart(Math.max(0, currentSliderStart - 1))}
                     disabled={currentSliderStart === 0}
-                    className="p-1 disabled:opacity-30 hover:bg-white/5 transition-colors border border-white/20"
+                    className="p-1 disabled:opacity-30 hover:bg-gray-100 transition-colors border border-gray-300"
                   >
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M18 15L12 9L6 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -198,7 +280,7 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
                         key={actualIndex}
                         onClick={() => setCurrentImageIndex(actualIndex)}
                         className={`aspect-square overflow-hidden cursor-pointer transition-all duration-200 border-2 ${
-                          isActive ? 'border-[rgb(255,184,0)]' : 'border-white/10 hover:border-white/30'
+                          isActive ? 'border-[#A37F66]' : 'border-gray-200 hover:border-gray-300'
                         }`}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -212,8 +294,8 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full bg-black/20 flex items-center justify-center">
-                            <span className="text-white/30 text-xs">{actualIndex + 1}</span>
+                          <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                            <span className="text-gray-400 text-xs">{actualIndex + 1}</span>
                           </div>
                         )}
                       </motion.button>
@@ -249,8 +331,8 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
-                  <div className="w-full h-full bg-black/20 border border-white/10 flex items-center justify-center">
-                    <span className="text-white/40 text-lg">Afbeelding {currentImageIndex + 1}</span>
+                  <div className="w-full h-full bg-gray-100 border border-gray-200 flex items-center justify-center">
+                    <span className="text-gray-400 text-lg">Afbeelding {currentImageIndex + 1}</span>
                   </div>
                 )}
               </div>
@@ -258,14 +340,14 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
               {/* Horizontal Thumbnail Carousel */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <p className="text-white/60 text-sm uppercase tracking-[0.14em]" style={{ fontFamily: "var(--font-sans)" }}>
+                  <p className="text-gray-500 text-sm uppercase tracking-[0.14em]" style={{ fontFamily: "var(--font-sans)" }}>
                     {currentImageIndex + 1} van {allImages.length} foto's
                   </p>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setCurrentSliderStart(Math.max(0, currentSliderStart - 1))}
                       disabled={currentSliderStart === 0}
-                      className="p-2 disabled:opacity-30 hover:bg-white/5 transition-colors border border-white/20"
+                      className="p-2 disabled:opacity-30 hover:bg-gray-100 transition-colors border border-gray-300"
                     >
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -274,7 +356,7 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
                     <button
                       onClick={() => setCurrentSliderStart(Math.min(allImages.length - 4, currentSliderStart + 1))}
                       disabled={currentSliderStart + 4 >= allImages.length}
-                      className="p-2 disabled:opacity-30 hover:bg-white/5 transition-colors border border-white/20"
+                      className="p-2 disabled:opacity-30 hover:bg-gray-100 transition-colors border border-gray-300"
                     >
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -293,7 +375,7 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
                         key={actualIndex}
                         onClick={() => setCurrentImageIndex(actualIndex)}
                         className={`aspect-square overflow-hidden cursor-pointer transition-all duration-200 border-2 ${
-                          isActive ? 'border-[rgb(255,184,0)]' : 'border-white/10 hover:border-white/30'
+                          isActive ? 'border-[#A37F66]' : 'border-gray-200 hover:border-gray-300'
                         }`}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -307,8 +389,8 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full bg-black/20 flex items-center justify-center">
-                            <span className="text-white/30 text-xs">{actualIndex + 1}</span>
+                          <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                            <span className="text-gray-400 text-xs">{actualIndex + 1}</span>
                           </div>
                         )}
                       </motion.button>
@@ -319,307 +401,285 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
             </div>
           </motion.div>
 
-          {/* Car Details - Three Column Layout */}
+        </div>
+      </motion.section>
+
+      {/* Premium Car Information Section */}
+      <motion.section 
+        className="bg-white text-[#31180E]"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <div className="mx-auto max-w-6xl px-6 pt-0 pb-8">
+
+          {/* Main CTAs */}
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_1fr_250px] gap-12"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            {/* Specifications */}
-            <div className="space-y-8">
-              <div>
-                <h2 
-                  className="text-white font-medium mb-6 uppercase tracking-[0.15em] text-2xl"
-                  style={{ fontFamily: "var(--font-cormorant)" }}
-                >
-                  SPECIFICATIES
-                </h2>
-                <div className="h-[2px] w-16 bg-[rgb(255,184,0)] mb-8"></div>
-                
-                <div className="space-y-6">
-                  <div>
-                    <p className="text-white/60 uppercase tracking-[0.14em] text-sm font-medium mb-2" style={{ fontFamily: "var(--font-sans)" }}>
-                      BOUWJAAR
-                    </p>
-                    <p className="text-white font-medium text-lg">{car.year}</p>
-                  </div>
-                  <div>
-                    <p className="text-white/60 uppercase tracking-[0.14em] text-sm font-medium mb-2" style={{ fontFamily: "var(--font-sans)" }}>
-                      KILOMETERSTAND
-                    </p>
-                    <p className="text-white font-medium text-lg">{car.kilometers.toLocaleString()} km</p>
-                  </div>
-                  <div>
-                    <p className="text-white/60 uppercase tracking-[0.14em] text-sm font-medium mb-2" style={{ fontFamily: "var(--font-sans)" }}>
-                      VERMOGEN
-                    </p>
-                    <p className="text-white font-medium text-lg">{car.power}</p>
-                  </div>
-                  <div>
-                    <p className="text-white/60 uppercase tracking-[0.14em] text-sm font-medium mb-2" style={{ fontFamily: "var(--font-sans)" }}>
-                      MERK
-                    </p>
-                    <p className="text-white font-medium text-lg">{car.brand}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Features */}
-            <div className="space-y-8">
-              <div>
-                <h2 
-                  className="text-white font-medium mb-6 uppercase tracking-[0.15em] text-2xl"
-                  style={{ fontFamily: "var(--font-cormorant)" }}
-                >
-                  OPTIES & UITRUSTING
-                </h2>
-                <div className="h-[2px] w-16 bg-[rgb(255,184,0)] mb-8"></div>
-                
-                <div className="grid grid-cols-1 gap-4">
-                  {[
-                    "Keramische remmen",
-                    "Lift systeem", 
-                    "Paint to Sample (PTS)",
-                    "PPF binnen & buiten",
-                    "Clubsport pakket",
-                    "Carbon details"
-                  ].map((feature, i) => (
-                    <motion.div 
-                      key={i} 
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: i * 0.1 }}
-                      viewport={{ once: true }}
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: "rgb(255,184,0)" }}>
-                        <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      <span className="text-white font-medium" style={{ fontFamily: "var(--font-sans)" }}>{feature}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Contact CTAs */}
-            <div className="space-y-4">
-              <button 
-                className="w-full bg-[rgb(255,184,0)] text-black py-3 px-4 font-medium uppercase tracking-[0.1em] hover:bg-[rgb(255,184,0)]/80 transition-colors text-sm" 
-                style={{ fontFamily: "var(--font-spartan)" }}
-              >
-                FINANCIERING AANVRAGEN
-              </button>
-
-              <a 
-                href="tel:+31599727012" 
-                className="w-full block bg-transparent border border-[rgb(255,184,0)] text-[rgb(255,184,0)] py-3 px-4 font-medium tracking-[0.1em] hover:bg-[rgb(255,184,0)] hover:text-black transition-all text-center text-sm"
-                style={{ fontFamily: "var(--font-spartan)" }}
-              >
-                0599 72 70 12
-              </a>
-
-              <button 
-                className="w-full flex items-center justify-center gap-2 bg-green-500 text-white py-3 px-4 font-medium uppercase tracking-[0.1em] hover:bg-green-600 transition-colors text-sm"
-                style={{ fontFamily: "var(--font-spartan)" }}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.051 3.488"
-                    fill="currentColor"
-                  />
-                </svg>
-                WHATSAPP
-              </button>
-            </div>
-          </motion.div>
-
-          {/* Detailed Specifications */}
-          <motion.div 
-            className="mt-16 p-0"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <h2 
-              className="text-white font-medium mb-6 uppercase tracking-[0.15em] text-2xl"
-              style={{ fontFamily: "var(--font-cormorant)" }}
-            >
-              VOLLEDIGE SPECIFICATIES
-            </h2>
-            <div className="h-[2px] w-16 bg-[rgb(255,184,0)] mb-8"></div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
-              {[
-                "PTS Rubystar",
-                "Full PPF binnen en buiten", 
-                "PCCB Keramische remmen",
-                "Carbon vloermatten",
-                "Sportuitlaatsysteem, eindpijp zwart",
-                "MIRRORLINK (CARPLAY/GAL)",
-                "Aluminiumpakket, matzwart (Blackline)",
-                "Carbon dak",
-                "Carbon interieurdelen", 
-                "Dorpellijsten carbon",
-                "Clubsportpakket",
-                "Cruise control",
-                "PTV Plus (geregeld sperdifferentieel)",
-                "Achterasbesturing",
-                "Hemelbekleding Alcantara",
-                "Ledkoplamp PDLS+ zwart",
-                "Stuurbekrachtiging snelh.afhankelijk (Servotronic)",
-                "PDLS + incl. matrix-straal",
-                "Bose Premium geluidssysteem",
-                "Armleuning midden met Porsche logo",
-                "Led-achterlicht met speciale styling",
-                "Porsche opschrift zwart mat",
-                "Stoelbekleding van alcantara",
-                "Liftfunctie vooras",
-                "Sport-Chrono-pakket Plus"
-              ].map((spec, i) => (
-                <motion.div 
-                  key={i}
-                  className="flex items-start gap-3"
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
-                  viewport={{ once: true }}
-                >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1 flex-shrink-0" style={{ color: "rgb(255,184,0)" }}>
-                    <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span className="text-white/80" style={{ fontFamily: "var(--font-sans)" }}>{spec}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-
-          {/* Warranty Packages */}
-          <motion.div 
-            className="mt-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <h2 
-              className="text-white font-medium mb-6 uppercase tracking-[0.15em] text-2xl"
-              style={{ fontFamily: "var(--font-cormorant)" }}
-            >
-              GARANTIEPAKKETTEN
-            </h2>
-            <div className="h-[2px] w-16 bg-[rgb(255,184,0)] mb-12"></div>
-            
-            <div className="space-y-8">
-              {/* Instapgarantie */}
-              <motion.div 
-                className="flex items-center justify-between py-4 border-b border-white/10"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div>
-                  <h3 
-                    className="text-white font-medium mb-2 uppercase tracking-[0.1em] text-lg"
-                    style={{ fontFamily: "var(--font-cormorant)" }}
-                  >
-                    INSTAPGARANTIE
-                  </h3>
-                  <p className="text-white/60 text-sm" style={{ fontFamily: "var(--font-sans)" }}>
-                    Auto's van 10 - 15 jaar oud en tot 200.000 km. Inclusief onderhoudsbeurt.
-                  </p>
-                </div>
-                <div className="text-[rgb(255,184,0)] text-2xl font-bold" style={{ fontFamily: "var(--font-sans)" }}>
-                  €399,-
-                </div>
-              </motion.div>
-
-              {/* Excellent Garantie */}
-              <motion.div 
-                className="flex items-center justify-between py-4 border-b border-white/10"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div>
-                  <h3 
-                    className="text-white font-medium mb-2 uppercase tracking-[0.1em] text-lg"
-                    style={{ fontFamily: "var(--font-cormorant)" }}
-                  >
-                    EXCELLENT GARANTIE
-                  </h3>
-                  <p className="text-white/60 text-sm" style={{ fontFamily: "var(--font-sans)" }}>
-                    Auto's tot 10 jaar oud en tot 200.000 km. Inclusief onderhoudsbeurt.
-                  </p>
-                </div>
-                <div className="text-[rgb(255,184,0)] text-2xl font-bold" style={{ fontFamily: "var(--font-sans)" }}>
-                  €499,-
-                </div>
-              </motion.div>
-
-              {/* Exclusive Garantie */}
-              <motion.div 
-                className="flex items-center justify-between py-4 border-b-2 border-[rgb(255,184,0)]/30 relative"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 
-                      className="text-white font-medium uppercase tracking-[0.1em] text-lg"
-                      style={{ fontFamily: "var(--font-cormorant)" }}
-                    >
-                      EXCLUSIVE GARANTIE
-                    </h3>
-                    <span className="bg-[rgb(255,184,0)] text-black text-xs font-bold px-2 py-1 uppercase tracking-wide">
-                      VOOR DEZE AUTO
-                    </span>
-                  </div>
-                  <p className="text-white/60 text-sm" style={{ fontFamily: "var(--font-sans)" }}>
-                    Speciaal voor onze exclusives. Auto's tot 10 jaar oud en tot 200.000 km. Inclusief onderhoudsbeurt.
-                  </p>
-                </div>
-                <div className="text-[rgb(255,184,0)] text-2xl font-bold" style={{ fontFamily: "var(--font-sans)" }}>
-                  €1.499,-
-                </div>
-              </motion.div>
-            </div>
-
-            <p className="text-white/50 text-xs mt-8" style={{ fontFamily: "var(--font-sans)" }}>
-              Onze advertenties worden met grote zorgvuldigheid op het internet geplaatst. 
-              Mocht er onverhoopt toch een fout in staan, dan kan hieraan geen rechten worden ontleend.
-            </p>
-          </motion.div>
-
-          {/* Contact CTA - Full Width */}
-          <motion.div 
-            className="text-center mt-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-white/60 text-sm mb-6" style={{ fontFamily: "var(--font-sans)" }}>
-              Voor meer vragen of informatie kunt u ons altijd bellen, mailen of smsen.
-            </p>
-            <motion.button
-              className="inline-block group text-black uppercase tracking-[0.15em] font-medium px-16 py-5 bg-[rgb(255,184,0)] hover:bg-[rgb(255,184,0)]/80 transition-all duration-300"
-              style={{ fontFamily: 'var(--font-spartan)' }}
+            <motion.button 
+              className="bg-[#A37F66] text-white py-4 px-8 font-medium uppercase tracking-[0.15em] hover:bg-[#31180E] transition-all duration-300 text-center"
+              style={{ fontFamily: "var(--font-spartan)" }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="block">INTERESSE? NEEM CONTACT OP</span>
+              OFFERTE AANVRAGEN
+            </motion.button>
+
+            <motion.button 
+              className="bg-transparent border-2 border-[#A37F66] text-[#A37F66] py-4 px-8 font-medium uppercase tracking-[0.15em] hover:bg-[#A37F66] hover:text-white transition-all duration-300 text-center"
+              style={{ fontFamily: "var(--font-spartan)" }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              TESTRIT PLANNEN
+            </motion.button>
+
+            <motion.button 
+              className="bg-transparent border border-gray-300 text-[#31180E] py-4 px-8 font-medium uppercase tracking-[0.15em] hover:bg-gray-100 transition-all duration-300 text-center"
+              style={{ fontFamily: "var(--font-spartan)" }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Laat u terug bellen
             </motion.button>
           </motion.div>
+
+          {/* Car Details Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Specifications */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h3
+                className="text-[#31180E] font-medium mb-4 uppercase tracking-[0.15em]"
+                style={{
+                  fontFamily: "var(--font-cormorant)",
+                  fontStyle: "normal",
+                }}
+              >
+                <span className="block text-[28px] leading-[32px]">SPECIFICATIES</span>
+              </h3>
+              <div className="h-[2px] w-24 bg-[#A37F66] mb-8"></div>
+
+              <div className="space-y-6">
+                <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                  <span className="text-gray-600 font-medium" style={{ fontFamily: "var(--font-sans)" }}>Bouwjaar</span>
+                  <span className="text-[#31180E] font-medium" style={{ fontFamily: "var(--font-sans)" }}>{car.year}</span>
+                </div>
+                <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                  <span className="text-gray-600 font-medium" style={{ fontFamily: "var(--font-sans)" }}>Kilometerstand</span>
+                  <span className="text-[#31180E] font-medium" style={{ fontFamily: "var(--font-sans)" }}>{car.kilometers.toLocaleString()} km</span>
+                </div>
+                <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                  <span className="text-gray-600 font-medium" style={{ fontFamily: "var(--font-sans)" }}>Vermogen</span>
+                  <span className="text-[#31180E] font-medium" style={{ fontFamily: "var(--font-sans)" }}>{car.power}</span>
+                </div>
+                <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                  <span className="text-gray-600 font-medium" style={{ fontFamily: "var(--font-sans)" }}>Merk</span>
+                  <span className="text-[#31180E] font-medium" style={{ fontFamily: "var(--font-sans)" }}>{car.brand}</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Features & Options */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h3
+                className="text-[#31180E] font-medium mb-4 uppercase tracking-[0.15em]"
+                style={{
+                  fontFamily: "var(--font-cormorant)",
+                  fontStyle: "normal",
+                }}
+              >
+                <span className="block text-[28px] leading-[32px]">HIGHLIGHTS</span>
+              </h3>
+              <div className="h-[2px] w-24 bg-[#A37F66] mb-8"></div>
+
+              <div className="grid grid-cols-1 gap-4">
+                {car.highlights?.map((feature, i) => (
+                  <motion.div 
+                    key={i} 
+                    className="flex items-center gap-3 py-2"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.8 + (i * 0.1) }}
+                    viewport={{ once: true }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: "#A37F66" }}>
+                      <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="text-[#31180E] font-medium" style={{ fontFamily: "var(--font-sans)" }}>{feature}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Description Section */}
+      <motion.section
+        className="bg-white text-[#31180E] py-16"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <div className="mx-auto max-w-4xl px-6">
+          <motion.div
+            className="text-left"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h2
+              className="text-[#31180E] font-medium mb-4 uppercase tracking-[0.15em]"
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontStyle: "normal",
+              }}
+            >
+              <span className="block text-[28px] leading-[32px]">Over deze auto</span>
+            </h2>
+            <div className="h-[2px] w-24 bg-[#A37F66] mb-8"></div>
+            <div className="prose prose-lg max-w-none text-gray-700 space-y-4" style={{ fontFamily: "var(--font-sans)" }}>
+              {car.description?.map((paragraph, i) => <p key={i}>{paragraph}</p>)}
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Contact Section */}
+      <motion.section 
+        className="bg-[#A37F66] text-white"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          <div className="text-center">
+            <motion.h2
+              className="text-white font-medium mb-6"
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontStyle: "normal",
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <span className="block text-[40px] leading-[44px]">INTERESSE IN DEZE AUTO?</span>
+            </motion.h2>
+            
+            <motion.p 
+              className="text-white/90 text-lg leading-relaxed mb-8 max-w-2xl mx-auto"
+              style={{ fontFamily: "var(--font-sans)" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              Neem direct contact op met Roel Hoefnagels voor persoonlijk advies 
+              en een vrijblijvende afspraak in onze showroom in Heeze.
+            </motion.p>
+
+            <motion.div 
+              className="flex flex-col md:flex-row items-center justify-center gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <a 
+                href="tel:+31631991992" 
+                className="flex items-center gap-3 text-white hover:text-white/80 transition-colors text-xl font-medium"
+                style={{ fontFamily: "var(--font-sans)" }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                +31 (0)6-31991992
+              </a>
+              
+              <span className="text-white/40 text-2xl">•</span>
+              
+              <a 
+                href="mailto:info@hoefnagels.nu" 
+                className="flex items-center gap-3 text-white hover:text-white/80 transition-colors text-xl font-medium"
+                style={{ fontFamily: "var(--font-sans)" }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <polyline points="22,6 12,13 2,6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                info@hoefnagels.nu
+              </a>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Detailed Specifications */}
+      <motion.section 
+        className="bg-white text-[#31180E]"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h2
+              className="text-[#31180E] font-medium mb-6"
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontStyle: "normal",
+              }}
+            >
+              <span className="block text-[40px] leading-[44px]">VOLLEDIGE SPECIFICATIES</span>
+            </h2>
+            <div className="h-[2px] w-24 bg-[#A37F66] mx-auto"></div>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+            {car.options?.map((spec, i) => (
+              <motion.div 
+                key={i}
+                className="flex items-start gap-3 py-2"
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.4 + (i * 0.02) }}
+                viewport={{ once: true }}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1 flex-shrink-0" style={{ color: "#A37F66" }}>
+                  <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="text-[#31180E]" style={{ fontFamily: "var(--font-sans)" }}>{spec}</span>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </motion.section>
 
@@ -636,7 +696,7 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
         >
           <button
             onClick={() => setIsDialogOpen(false)}
-            className="absolute top-6 right-6 text-white hover:text-[rgb(255,184,0)] transition-colors z-10"
+            className="absolute top-6 right-6 text-white hover:text-[#A37F66] transition-colors z-10"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -662,7 +722,7 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
               e.stopPropagation()
               setCurrentImageIndex((prev) => prev > 0 ? prev - 1 : allImages.length - 1)
             }}
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-[rgb(255,184,0)] transition-colors p-2"
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-[#A37F66] transition-colors p-2"
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -674,7 +734,7 @@ export function CarPageClient({ car, additionalImages }: CarPageClientProps) {
               e.stopPropagation()
               setCurrentImageIndex((prev) => prev < allImages.length - 1 ? prev + 1 : 0)
             }}
-            className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-[rgb(255,184,0)] transition-colors p-2"
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-[#A37F66] transition-colors p-2"
           >
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

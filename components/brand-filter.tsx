@@ -34,13 +34,13 @@ export function BrandFilter({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="flex items-center gap-2 p-0 text-sm font-medium text-white bg-transparent hover:bg-transparent h-auto"
+          className="flex items-center gap-2 p-0 text-sm font-medium text-[#31180E] bg-transparent hover:bg-transparent h-auto"
         >
-          <span className="border-b border-white/50 pb-1">Merk</span>
+          <span className="border-b border-[#31180E]/50 pb-1">Merk</span>
           <ChevronDown className="w-4 h-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-[180px] bg-black border-white/20 text-white rounded-none">
+      <DropdownMenuContent className="w-[180px] bg-white border-gray-200 text-[#31180E] rounded-none">
         {brands.map((brand) => (
           <DropdownMenuCheckboxItem
             key={brand.name}
@@ -57,7 +57,7 @@ export function BrandFilter({
                 alt={brand.name}
                 width={20}
                 height={20}
-                className="mr-2 brightness-0 invert"
+                className="mr-2"
               />
               <span>{brand.name}</span>
             </div>

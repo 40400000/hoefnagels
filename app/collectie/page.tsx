@@ -62,7 +62,7 @@ export default function CollectiePage() {
   }, [selectedBrands, priceRange, kmRange])
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-white">
       <Navbar />
 
       <main className="relative pt-8 md:pt-8">
@@ -70,12 +70,12 @@ export default function CollectiePage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8 px-4 ">
             <div>
               <h1
-                className="text-white text-3xl md:text-4xl font-medium uppercase tracking-wide"
+                className="text-[#31180E] text-3xl md:text-4xl font-medium uppercase tracking-wide"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
                 COLLECTIE
               </h1>
-              <div className="mt-4 h-[2px] w-16 bg-[rgb(255,184,0)]"></div>
+              <div className="mt-4 h-[2px] w-16 bg-[#A37F66]"></div>
             </div>
             <div className="flex items-center gap-6">
               <RangeFilter

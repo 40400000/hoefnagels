@@ -1,12 +1,36 @@
 export default function Footer() {
   return (
-    <footer className="bg-black text-white border-t border-white/17">
+    <footer className="bg-gray-50 text-[#31180E] border-t border-gray-200">
       <div className="mx-auto max-w-7xl px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Company Description */}
+        <div className="mb-12 text-center">
+          <h2
+            className="text-[#31180E] font-medium mb-4 text-2xl"
+            style={{
+              fontFamily: "var(--font-cormorant)",
+              fontStyle: "normal",
+            }}
+          >
+            Hoefnagels Punt B.V.
+          </h2>
+          <p
+            className="max-w-4xl mx-auto text-gray-700 text-lg leading-relaxed"
+            style={{
+              fontFamily: "var(--font-sans)",
+              fontStyle: "normal",
+              fontWeight: 400,
+            }}
+          >
+            Wij vinden de juiste exclusieve auto bij de juiste persoon, met een persoonlijke, no-nonsense benadering, 
+            jarenlange ervaring, een gigantisch netwerk én met liefde voor het vak en de auto's.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Contact Information */}
           <div>
             <h3
-              className="text-white font-medium mb-4"
+              className="text-[#31180E] font-medium mb-4"
               style={{
                 fontFamily: "var(--font-cormorant)",
                 fontStyle: "normal",
@@ -16,92 +40,92 @@ export default function Footer() {
             >
               Contact
             </h3>
-            <div className="space-y-2">
+            <div className="space-y-3">
               <div>
                 <p
-                  className="font-medium mb-0"
+                  className="font-medium mb-1"
                   style={{
                     fontFamily: "var(--font-sans)",
                     fontStyle: "normal",
                     fontWeight: 500,
-                    color: "rgb(255,255,255)",
+                    color: "#31180E",
                     fontSize: "14px",
                     lineHeight: "20px",
                   }}
                 >
-                  Telefoonnummer
+                  E-mail
                 </p>
                 <a
-                  href="tel:0599727012"
+                  href="mailto:info@hoefnagels.nu"
                   style={{
                     fontFamily: "var(--font-sans)",
                     fontStyle: "normal",
                     fontWeight: 400,
-                    color: "rgb(92,92,92)",
+                    color: "#666666",
                     fontSize: "14px",
                     lineHeight: "20px",
                   }}
-                  className="hover:text-white transition-colors duration-300 block"
+                  className="hover:text-[#31180E] transition-colors duration-300 block"
                 >
-                  0599 727012
+                  info@hoefnagels.nu
                 </a>
               </div>
               <div>
                 <p
-                  className="font-medium mb-0"
+                  className="font-medium mb-1"
                   style={{
                     fontFamily: "var(--font-sans)",
                     fontStyle: "normal",
                     fontWeight: 500,
-                    color: "rgb(255,255,255)",
+                    color: "#31180E",
                     fontSize: "14px",
                     lineHeight: "20px",
                   }}
                 >
-                  WhatsApp
+                  Roel Hoefnagels
                 </p>
                 <a
-                  href="https://wa.me/31625370090"
+                  href="tel:+31631991992"
                   style={{
                     fontFamily: "var(--font-sans)",
                     fontStyle: "normal",
                     fontWeight: 400,
-                    color: "rgb(92,92,92)",
+                    color: "#666666",
                     fontSize: "14px",
                     lineHeight: "20px",
                   }}
-                  className="hover:text-white transition-colors duration-300 block"
+                  className="hover:text-[#31180E] transition-colors duration-300 block"
                 >
-                  06 25370090
+                  +31 (0)6-31991992
                 </a>
               </div>
               <div>
                 <p
-                  className="font-medium mb-0"
+                  className="font-medium mb-1"
                   style={{
                     fontFamily: "var(--font-sans)",
                     fontStyle: "normal",
                     fontWeight: 500,
-                    color: "rgb(255,255,255)",
+                    color: "#31180E",
                     fontSize: "14px",
                     lineHeight: "20px",
                   }}
                 >
-                  Email
+                  Camiel Billet
                 </p>
                 <a
-                  href="mailto:info@rtoexclusive.nl"
+                  href="tel:+31631991990"
                   style={{
                     fontFamily: "var(--font-sans)",
                     fontStyle: "normal",
                     fontWeight: 400,
-                    color: "rgb(92,92,92)",
+                    color: "#666666",
                     fontSize: "14px",
                     lineHeight: "20px",
                   }}
-                  className="hover:text-white transition-colors duration-300 block"
+                  className="hover:text-[#31180E] transition-colors duration-300 block"
                 >
-                  info@rtoexclusive.nl
+                  +31 (0) 6 31991990
                 </a>
               </div>
             </div>
@@ -110,7 +134,7 @@ export default function Footer() {
           {/* Opening Hours */}
           <div>
             <h3
-              className="text-white font-medium mb-4"
+              className="text-[#31180E] font-medium mb-4"
               style={{
                 fontFamily: "var(--font-cormorant)",
                 fontStyle: "normal",
@@ -122,13 +146,12 @@ export default function Footer() {
             </h3>
             <div className="space-y-1">
               {[
-                { day: "Maandag", hours: "08.00-18.00" },
-                { day: "Dinsdag", hours: "08.00-18.00" },
-                { day: "Woensdag", hours: "08.00-18.00" },
-                { day: "Donderdag", hours: "08.00-18.00" },
-                { day: "Vrijdag", hours: "08.00-18.00" },
-                { day: "Zaterdag", hours: "09.00-16.00" },
-                { day: "Zondag", hours: "Gesloten" },
+                { day: "Maandag", hours: "op afspraak" },
+                { day: "Dinsdag", hours: "op afspraak" },
+                { day: "Woensdag", hours: "op afspraak" },
+                { day: "Donderdag", hours: "op afspraak" },
+                { day: "Vrijdag", hours: "op afspraak" },
+                { day: "Zaterdag", hours: "op afspraak" },
               ].map((item) => (
                 <div key={item.day} className="flex justify-between">
                   <span
@@ -136,7 +159,7 @@ export default function Footer() {
                       fontFamily: "var(--font-sans)",
                       fontStyle: "normal",
                       fontWeight: 400,
-                      color: "rgb(92,92,92)",
+                      color: "#666666",
                       fontSize: "14px",
                       lineHeight: "20px",
                     }}
@@ -148,7 +171,7 @@ export default function Footer() {
                       fontFamily: "var(--font-sans)",
                       fontStyle: "normal",
                       fontWeight: 400,
-                      color: item.hours === "Gesloten" ? "rgb(92,92,92)" : "rgb(255,255,255)",
+                      color: "#31180E",
                       fontSize: "14px",
                       lineHeight: "20px",
                     }}
@@ -163,7 +186,7 @@ export default function Footer() {
           {/* Address */}
           <div>
             <h3
-              className="text-white font-medium mb-4"
+              className="text-[#31180E] font-medium mb-4"
               style={{
                 fontFamily: "var(--font-cormorant)",
                 fontStyle: "normal",
@@ -178,44 +201,66 @@ export default function Footer() {
                 style={{
                   fontFamily: "var(--font-sans)",
                   fontStyle: "normal",
-                  fontWeight: 400,
-                  color: "rgb(92,92,92)",
+                  fontWeight: 500,
+                  color: "#31180E",
                   fontSize: "14px",
                   lineHeight: "20px",
                 }}
               >
-                Koperslager 1
+                Hoefnagels Punt B.V.
               </p>
               <p
                 style={{
                   fontFamily: "var(--font-sans)",
                   fontStyle: "normal",
                   fontWeight: 400,
-                  color: "rgb(92,92,92)",
+                  color: "#666666",
                   fontSize: "14px",
                   lineHeight: "20px",
                 }}
               >
-                9502 DA Stadskanaal
+                Geldropseweg 22
               </p>
+              <p
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  color: "#666666",
+                  fontSize: "14px",
+                  lineHeight: "20px",
+                }}
+              >
+                5591 EC Heeze Nederland
+              </p>
+              <a
+                href="#"
+                className="inline-block mt-2 text-[#31180E] hover:text-[#31180E]/80 transition-colors duration-300 font-medium"
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "14px",
+                }}
+              >
+                Route →
+              </a>
             </div>
           </div>
         </div>
 
         {/* Bottom section with divider */}
-        <div className="mt-10 pt-6 border-t border-white/17">
+        <div className="mt-10 pt-6 border-t border-white/20">
           <div className="text-center">
             <p
               style={{
                 fontFamily: "var(--font-sans)",
                 fontStyle: "normal",
                 fontWeight: 400,
-                color: "rgb(92,92,92)",
+                color: "#666666",
                 fontSize: "14px",
                 lineHeight: "20px",
               }}
             >
-              © {new Date().getFullYear()} RTO Exclusive. Alle rechten voorbehouden.
+              © {new Date().getFullYear()} Hoefnagels Punt B.V. - Alle rechten voorbehouden - De snelste auto's voor de scherpste prijs!
             </p>
           </div>
         </div>

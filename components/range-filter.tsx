@@ -48,18 +48,18 @@ export function RangeFilter({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="flex items-center gap-2 p-0 text-sm font-medium text-white bg-transparent hover:bg-transparent h-auto"
+          className="flex items-center gap-2 p-0 text-sm font-medium text-[#31180E] bg-transparent hover:bg-transparent h-auto"
         >
-          <span className="border-b border-white/50 pb-1">{label}</span>
+          <span className="border-b border-[#31180E]/50 pb-1">{label}</span>
           <ChevronDown className="w-4 h-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="w-[280px] bg-black border-white/20 text-white rounded-none p-4"
+        className="w-[280px] bg-white border-gray-200 text-[#31180E] rounded-none p-4"
         onCloseAutoFocus={(e) => e.preventDefault()}
       >
         <div className="w-full">
-          <div className="flex justify-between text-xs mb-4 text-white/70">
+          <div className="flex justify-between text-xs mb-4 text-[#31180E]/70">
             <span>{formatLabel(localValue[0])}</span>
             <span>{formatLabel(localValue[1])}</span>
           </div>
@@ -70,7 +70,7 @@ export function RangeFilter({
             value={localValue}
             onValueChange={handleValueChange}
             onValueCommit={handleCommit}
-            className="[&>span:first-child]:h-1 [&>span:first-child]:bg-white/20 [&_[role=slider]]:bg-white [&_[role=slider]]:w-2 [&_[role=slider]]:h-4 [&_[role=slider]]:rounded-sm [&_[role=slider]]:border-0 [&_[role=slider]:focus-visible]:ring-0 [&_[role=slider]:focus-visible]:ring-offset-0"
+            className="[&>span:first-child]:h-1 [&>span:first-child]:bg-gray-200 [&_[role=slider]]:bg-[#A37F66] [&_[role=slider]]:w-2 [&_[role=slider]]:h-4 [&_[role=slider]]:rounded-sm [&_[role=slider]]:border-0 [&_[role=slider]:focus-visible]:ring-0 [&_[role=slider]:focus-visible]:ring-offset-0"
           />
         </div>
       </DropdownMenuContent>

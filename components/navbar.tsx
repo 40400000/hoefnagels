@@ -10,22 +10,23 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const isHomePage = pathname === '/';
+  const isCollectiePage = pathname === '/collectie';
+  const isAutoPage = pathname === '/auto';
+  const useLightText = isHomePage || isAutoPage;
 
   return (
     <nav className="absolute top-0 left-0 right-0 z-30">
-      <div className={`mx-auto ${isHomePage ? 'max-w-7xl' : 'max-w-9xl'} px-6  py-4`}>
-        <div className={`${isHomePage ? 'border-b  border-white/20' : 'border-none'} pb-4`}>
+      <div className={`mx-auto ${isCollectiePage ? 'max-w-9xl' : 'max-w-7xl'} px-6  py-4`}>
+        <div className={`border-b pb-4 ${isHomePage ? 'border-white/20' : 'border-gray-200'}`}>
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0">
             <Link href="/">
-            <Image
-              src="/logo.png"
-              alt="RTO Logo"
-              width={150}
-              height={150}
-              className="h-10 w-auto"
-              priority
-            />
+              <span
+                className={`text-2xl md:text-3xl font-bold tracking-wider ${useLightText ? 'text-white' : 'text-[#A37F66]'}`}
+                style={{ fontFamily: 'var(--font-cormorant)' }}
+              >
+                HOEFNAGELS
+              </span>
             </Link>
           </div>
           
@@ -34,51 +35,85 @@ export default function Navbar() {
             <div className="hidden md:flex items-center space-x-8">
               <Link 
                 href="/collectie" 
-                className={`relative text-white hover:text-amber-400 transition-colors duration-200 uppercase tracking-[0.1em] font-medium text-lg ${
-                  pathname === '/collectie' ? 'text-amber-400' : ''
+                className={`relative transition-colors duration-200 uppercase tracking-[0.1em] font-medium text-lg ${
+                  useLightText 
+                    ? 'text-white hover:text-amber-400' 
+                    : 'text-[#31180E] hover:text-[#A37F66]'
+                } ${
+                  pathname === '/collectie' ? (useLightText ? 'text-amber-400' : 'text-[#A37F66]') : ''
                 }`}
                 style={{ fontFamily: 'var(--font-spartan)' }}
               >
                 COLLECTIE
                 {pathname === '/collectie' && (
-                  <span className="absolute -bottom-2 left-0 right-0 h-[1px] bg-amber-400" />
+                  <span className={`absolute -bottom-2 left-0 right-0 h-[1px] ${isHomePage ? 'bg-amber-400' : 'bg-[#A37F66]'}`} />
                 )}
               </Link>
-              <a 
-                href="#" 
-                className="text-white hover:text-brand transition-colors duration-200 uppercase tracking-[0.1em] font-medium text-lg"
+              <Link 
+                href="/over-ons" 
+                className={`relative transition-colors duration-200 uppercase tracking-[0.1em] font-medium text-lg ${
+                  useLightText 
+                    ? 'text-white hover:text-amber-400' 
+                    : 'text-[#31180E] hover:text-[#A37F66]'
+                } ${
+                  pathname === '/over-ons' ? (useLightText ? 'text-amber-400' : 'text-[#A37F66]') : ''
+                }`}
                 style={{ fontFamily: 'var(--font-spartan)' }}
               >
                 OVER ONS
-              </a>
-              <a 
-                href="#" 
-                className="text-white hover:text-brand transition-colors duration-200 uppercase tracking-[0.1em] font-medium text-lg"
+                {pathname === '/over-ons' && (
+                  <span className={`absolute -bottom-2 left-0 right-0 h-[1px] ${isHomePage ? 'bg-amber-400' : 'bg-[#A37F66]'}`} />
+                )}
+              </Link>
+              <Link 
+                href="/contact" 
+                className={`relative transition-colors duration-200 uppercase tracking-[0.1em] font-medium text-lg ${
+                  useLightText 
+                    ? 'text-white hover:text-amber-400' 
+                    : 'text-[#31180E] hover:text-[#A37F66]'
+                } ${
+                  pathname === '/contact' ? (useLightText ? 'text-amber-400' : 'text-[#A37F66]') : ''
+                }`}
                 style={{ fontFamily: 'var(--font-spartan)' }}
               >
                 CONTACT
-              </a>
+                {pathname === '/contact' && (
+                  <span className={`absolute -bottom-2 left-0 right-0 h-[1px] ${isHomePage ? 'bg-amber-400' : 'bg-[#A37F66]'}`} />
+                )}
+              </Link>
               
               <div className="flex items-center space-x-1 ml-4">
                 <a 
                   href="#" 
-                  className="text-white hover:text-amber-400 transition-colors duration-200 uppercase tracking-[0.1em] font-normal text-lg"
+                  className={`transition-colors duration-200 uppercase tracking-[0.1em] font-normal text-lg ${
+                    useLightText 
+                      ? 'text-white hover:text-amber-400' 
+                      : 'text-[#31180E] hover:text-[#A37F66]'
+                  }`}
                   style={{ fontFamily: 'var(--font-spartan)' }}
                 >
                   NL
                 </a>
-                <span className="text-white/40 text-lg">/</span>
+                <span className={`text-lg ${useLightText ? 'text-white/40' : 'text-[#31180E]/40'}`}>/</span>
                 <a 
                   href="#" 
-                  className="text-white/80 hover:text-amber-400 transition-colors duration-200 uppercase tracking-[0.1em] font-normal text-lg"
+                  className={`transition-colors duration-200 uppercase tracking-[0.1em] font-normal text-lg ${
+                    useLightText 
+                      ? 'text-white/80 hover:text-amber-400' 
+                      : 'text-[#31180E]/80 hover:text-[#A37F66]'
+                  }`}
                   style={{ fontFamily: 'var(--font-spartan)' }}
                 >
                   DE
                 </a>
-                <span className="text-white/40 text-lg">/</span>
+                <span className={`text-lg ${useLightText ? 'text-white/40' : 'text-[#31180E]/40'}`}>/</span>
                 <a 
                   href="#" 
-                  className="text-white/80 hover:text-amber-400 transition-colors duration-200 uppercase tracking-[0.1em] font-normal text-lg"
+                  className={`transition-colors duration-200 uppercase tracking-[0.1em] font-normal text-lg ${
+                    useLightText 
+                      ? 'text-white/80 hover:text-amber-400' 
+                      : 'text-[#31180E]/80 hover:text-[#A37F66]'
+                  }`}
                   style={{ fontFamily: 'var(--font-spartan)' }}
                 >
                   EN
@@ -88,12 +123,17 @@ export default function Navbar() {
             
             {/* Hamburger menu button */}
             <button
-              className="text-white p-2 hover:text-[rgb(255,184,0)] transition-colors duration-200 ml-6"
+              className={`ml-6 p-2 rounded-full transition-all duration-200 flex items-center justify-center border-2 ${
+                useLightText
+                  ? 'border-white text-white hover:border-[#A37F66] hover:text-[#A37F66]'
+                  : 'border-[#A37F66] text-[#31180E] hover:border-[#31180E] hover:text-[#31180E]'
+              }`}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
+              style={{ width: 44, height: 44 }}
             >
               <svg
-                className="w-6 h-6"
+                className="w-5 h-5"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -118,7 +158,7 @@ export default function Navbar() {
       
       {/* Full-screen menu overlay */}
       <div 
-        className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-sm transition-all duration-700 ease-out ${
+        className={`fixed inset-0 z-40 bg-black/40 backdrop-blur-sm transition-all duration-700 ease-out ${
           isMenuOpen 
             ? 'opacity-100 visible' 
             : 'opacity-0 invisible'
@@ -127,7 +167,7 @@ export default function Navbar() {
       >
         {/* Close Button */}
         <button
-          className={`absolute top-8 right-8 text-white hover:text-[rgb(255,184,0)] transition-all duration-300 z-50 transform ${
+          className={`absolute top-8 right-8 text-white hover:text-[#A37F66] transition-all duration-300 z-50 transform ${
             isMenuOpen ? 'scale-100 opacity-100' : 'scale-75 opacity-0'
           }`}
           style={{ transitionDelay: isMenuOpen ? '400ms' : '0ms' }}
@@ -170,11 +210,11 @@ export default function Navbar() {
             >
               COLLECTIE
             </Link>
-            <a 
-              href="#" 
+            <Link 
+              href="/over-ons" 
               className={`block text-white hover:text-amber-400 transition-all duration-500 uppercase tracking-[0.15em] font-medium text-4xl transform ${
                 isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-              }`}
+              } ${pathname === '/over-ons' ? 'text-amber-400' : ''}`}
               style={{ 
                 fontFamily: 'var(--font-spartan)',
                 transitionDelay: isMenuOpen ? '400ms' : '0ms'
@@ -182,12 +222,12 @@ export default function Navbar() {
               onClick={() => setIsMenuOpen(false)}
             >
               OVER ONS
-            </a>
-            <a 
-              href="#" 
+            </Link>
+            <Link 
+              href="/contact" 
               className={`block text-white hover:text-amber-400 transition-all duration-500 uppercase tracking-[0.15em] font-medium text-4xl transform ${
                 isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-              }`}
+              } ${pathname === '/contact' ? 'text-amber-400' : ''}`}
               style={{ 
                 fontFamily: 'var(--font-spartan)',
                 transitionDelay: isMenuOpen ? '600ms' : '0ms'
@@ -195,7 +235,7 @@ export default function Navbar() {
               onClick={() => setIsMenuOpen(false)}
             >
               CONTACT
-            </a>
+            </Link>
           </div>
           
           <div className={`flex items-center space-x-3 mt-12 transform transition-all duration-500 ${
@@ -241,7 +281,7 @@ export default function Navbar() {
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className={`${isHomePage ? 'max-w-7xl' : 'max-w-9xl'} w-full flex`}>
+          <div className={`${isCollectiePage ? 'max-w-7xl' : 'max-w-7xl'} w-full flex`}>
             {/* Left Side - Navigation */}
             <div className="flex-1 flex flex-col justify-center space-y-12">
               <div className="space-y-8">
@@ -258,11 +298,11 @@ export default function Navbar() {
                 >
                   COLLECTIE
                 </Link>
-                <a 
-                  href="#" 
+                <Link 
+                  href="/over-ons" 
                   className={`block text-white hover:text-amber-400 transition-all duration-500 uppercase tracking-[0.15em] font-medium text-6xl transform ${
                     isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-                  }`}
+                  } ${pathname === '/over-ons' ? 'text-amber-400' : ''}`}
                   style={{ 
                     fontFamily: 'var(--font-spartan)',
                     transitionDelay: isMenuOpen ? '400ms' : '0ms'
@@ -270,12 +310,12 @@ export default function Navbar() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   OVER ONS
-                </a>
-                <a 
-                  href="#" 
+                </Link>
+                <Link 
+                  href="/contact" 
                   className={`block text-white hover:text-amber-400 transition-all duration-500 uppercase tracking-[0.15em] font-medium text-6xl transform ${
                     isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
-                  }`}
+                  } ${pathname === '/contact' ? 'text-amber-400' : ''}`}
                   style={{ 
                     fontFamily: 'var(--font-spartan)',
                     transitionDelay: isMenuOpen ? '600ms' : '0ms'
@@ -283,7 +323,7 @@ export default function Navbar() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   CONTACT
-                </a>
+                </Link>
               </div>
               
               <div className={`flex items-center space-x-3 transform transition-all duration-500 ${
@@ -338,8 +378,9 @@ export default function Navbar() {
                   className="text-white text-xl leading-relaxed"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
-                  Koperslager 1<br />
-                  9502 DA Stadskanaal
+                  Hoefnagels Punt B.V.<br />
+                  Geldropseweg 22<br />
+                  5591 EC Heeze Nederland
                 </p>
               </div>
 
@@ -356,14 +397,14 @@ export default function Navbar() {
                     className="text-white/80 text-lg"
                     style={{ fontFamily: 'var(--font-sans)' }}
                   >
-                    Telefoonnummer
+                    Telefoon
                   </p>
                   <a 
-                    href="tel:0599727012" 
-                    className="text-white text-xl hover:text-amber-400 transition-colors duration-200"
+                    href="tel:+31631991992" 
+                    className="text-white text-xl hover:text-[#A37F66] transition-colors duration-200"
                     style={{ fontFamily: 'var(--font-sans)' }}
                   >
-                    0599 727012
+                    +31 (0)6-31991992
                   </a>
                 </div>
                 <div className="space-y-1">
@@ -374,11 +415,11 @@ export default function Navbar() {
                     WhatsApp
                   </p>
                   <a 
-                    href="tel:0625370090" 
-                    className="text-white text-xl hover:text-amber-400 transition-colors duration-200"
+                    href="tel:+31631991990" 
+                    className="text-white text-xl hover:text-[#A37F66] transition-colors duration-200"
                     style={{ fontFamily: 'var(--font-sans)' }}
                   >
-                    06 25370090
+                    +31 (0)6 31991990
                   </a>
                 </div>
                 <div className="space-y-1">
@@ -389,11 +430,11 @@ export default function Navbar() {
                     Email
                   </p>
                   <a 
-                    href="mailto:info@rtoexclusive.nl" 
-                    className="text-white text-xl hover:text-amber-400 transition-colors duration-200"
+                    href="mailto:info@hoefnagels.nu" 
+                    className="text-white text-xl hover:text-[#A37F66] transition-colors duration-200"
                     style={{ fontFamily: 'var(--font-sans)' }}
                   >
-                    info@rtoexclusive.nl
+                    info@hoefnagels.nu
                   </a>
                 </div>
               </div>
