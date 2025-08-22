@@ -81,3 +81,4 @@ engine: "4.0 V8",
     logo: "/autologos/ferrari.svg",
   },
 ]
+
