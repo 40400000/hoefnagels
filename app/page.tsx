@@ -15,14 +15,17 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <div className="relative w-full h-screen border-b border-gray-200 overflow-hidden">
         <Navbar />
-        <iframe
+        <video
           className="absolute inset-0 min-w-full min-h-full w-full h-full object-cover object-center transform-gpu scale-150 origin-center will-change-transform"
-          src="https://www.youtube.com/embed/l-2uVzmgzP0?rel=0&autoplay=1&mute=1&showinfo=0&enablejsapi=1&loop=1&iv_load_policy=3&playlist=l-2uVzmgzP0"
-          title="Hoefnagels Hero Video"
-          frameBorder="0"
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-        />
+          autoPlay
+          muted
+          loop
+          playsInline
+
+        >
+          <source src="/hoefnagelshero.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         
         {/* Uniform dark overlay */}
         <div className="absolute inset-0 z-10 bg-black/40"></div>
